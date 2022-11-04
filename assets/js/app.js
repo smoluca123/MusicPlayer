@@ -26,11 +26,15 @@ const app = {
   isMuted: false,
   isRandom: false,
   isRepeat: false,
+  currentVolume: 1,
   config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
   songs: songs,
   setConfig: function (key, value) {
     this.config[key] = value;
     localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config));
+  },
+  getConfig: function (key) {
+    localStorage.getItem(PLAYER_STORAGE_KEY, key);
   },
   render: function () {
     const htmls = this.songs.map((song, index) => {
@@ -235,13 +239,31 @@ const app = {
     }, 300);
   },
   loadCurrentSong: function () {
+    this.setConfig('currentIndex', this.currentIndex);
     heading.innerText = this.currentSong.name;
     cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
     audio.src = this.currentSong.path;
+    audio.volume = this.currentVolume;
+  },
+  loadConfigDefault: function () {
+    this.setConfig('isRandom', this.isRandom);
+    this.setConfig('isRepeat', this.isRepeat);
+    this.setConfig('currentVolume', this.currentVolume);
+    this.setConfig('currentIndex', this.currentIndex);
   },
   loadConfig: function () {
     this.isRandom = this.config.isRandom;
     this.isRepeat = this.config.isRepeat;
+    this.currentVolume = this.config.currentVolume;
+    this.currentIndex = this.config.currentIndex;
+  },
+  renderConfig: function () {
+    if (this.isRandom) {
+      randomBtn.classList.toggle('active', this.isRandom);
+    }
+    if (this.isRepeat) {
+      repeatBtn.classList.toggle('active', this.isRepeat);
+    }
   },
   nextSong: function () {
     this.currentIndex++;
@@ -279,13 +301,17 @@ const app = {
     // if (audio.volume < 1.1) {
     //   audio.volume + volume;
     // }
-    audio.volume += volume;
+    audio.volume = this.currentVolume + volume;
+    this.currentVolume = audio.volume;
+    this.setConfig('currentVolume', this.currentVolume);
+    this.render();
     if (audio.volume > 1) {
       audio.volume = 1;
     }
     if (audio.volume < 0.1) {
       player.classList.add('muted');
       audio.volume = 0;
+      this.currentVolume = audio.volume;
     } else {
       player.classList.remove('muted');
     }
@@ -294,15 +320,14 @@ const app = {
   start: function () {
     // Gán cấu hình từ config vào ứng dụng
     this.loadConfig();
+    this.loadConfigDefault();
     this.defineProperties();
     this.handleEvents();
 
     this.loadCurrentSong();
 
     this.render();
-
-    repeatBtn.classList.toggle('active', this.isRepeat);
-    randomBtn.classList.toggle('active', this.isRandom);
+    this.renderConfig();
   },
 };
 app.start();

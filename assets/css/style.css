@@ -10,7 +10,7 @@
 }
 
 body {
-    background-color: #f5f5f5;
+    background-color: #191a2e;
 }
 
 html {
@@ -91,12 +91,18 @@ header h2 {
     margin: auto;
 }
 
+.dashboard {
+    box-shadow: 0 -15px 30px rgba(255, 255, 255, 0.255);
+
+}
+
 /* CONTROL */
 .control {
     display: flex;
     align-items: center;
     justify-content: space-around;
     padding: 18px 0 8px 0;
+
 }
 
 .control .btn {
@@ -166,6 +172,7 @@ header h2 {
 
 .song.active {
     background-color: var(--primary-color);
+    box-shadow: 0 0 16px #ec1f55;
 }
 
 .song:active {
