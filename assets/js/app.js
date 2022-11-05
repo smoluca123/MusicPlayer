@@ -252,10 +252,10 @@ const app = {
     this.setConfig('currentIndex', this.currentIndex);
   },
   loadConfig: function () {
-    this.isRandom = this.config.isRandom;
-    this.isRepeat = this.config.isRepeat;
-    this.currentVolume = this.config.currentVolume;
-    this.currentIndex = this.config.currentIndex;
+    this.isRandom = this.config.isRandom || this.isRandom;
+    this.isRepeat = this.config.isRepeat || this.isRepeat;
+    this.currentVolume = this.config.currentVolume || this.currentVolume;
+    this.currentIndex = this.config.currentIndex || this.currentIndex;
   },
   renderConfig: function () {
     if (this.isRandom) {
@@ -320,7 +320,7 @@ const app = {
   start: function () {
     // Gán cấu hình từ config vào ứng dụng
     this.loadConfig();
-    this.loadConfigDefault();
+    // this.loadConfigDefault();
     this.defineProperties();
     this.handleEvents();
 
@@ -328,6 +328,11 @@ const app = {
 
     this.render();
     this.renderConfig();
+
+    sessionStorage.setItem(
+      PLAYER_STORAGE_KEY,
+      JSON.stringify(this.currentSong)
+    );
   },
 };
 app.start();

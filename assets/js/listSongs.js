@@ -16,7 +16,7 @@ const songs = [
   {
     name: 'Minefields',
     singer: 'Faouzia & John Legend',
-    path: 'https://data.chiasenhac.com/down2/2263/5/2262982-19ab9e14/128/Minefields%20-%20Faouzia_%20John%20Legend.mp3',
+    path: './assets/music/Minefields - Faouzia_ John Legend.mp3',
     image: 'https://i.ytimg.com/vi/V53lYA_EICY/maxresdefault.jpg',
   },
   {
