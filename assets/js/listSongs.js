@@ -20,10 +20,10 @@ const songs = [
     image: 'https://i.ytimg.com/vi/V53lYA_EICY/maxresdefault.jpg',
   },
   {
-    name: 'Naachne Ka Shaunq',
-    singer: 'Raftaar x Brobha V',
-    path: 'https://www.naijafinix.com.ng/wp-content/uploads/2021/03/Zoe-Wees-Control-via-Naijafinix.com_.mp3?_=1',
-    image: 'https://i.ytimg.com/vi/QvswgfLDuPg/maxresdefault.jpg',
+    name: 'Summertime Sadness',
+    singer: 'Lana Del Rey',
+    path: './assets/music/Lana Del Rey - Summertime Sadness (Official Music Video).mp3',
+    image: 'https://i1.sndcdn.com/artworks-000338788569-fxot50-t500x500.jpg',
   },
 ];
 
